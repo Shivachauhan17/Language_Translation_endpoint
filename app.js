@@ -1,10 +1,14 @@
 const axios = require('axios');
 const cors = require('cors');
 const express = require('express');
+const dotenv=require('dotenv')
 
-app.use(cors());
+dotenv.config({path:'.env'})
+
+
 // Create Express app
 const app = express();
+app.use(cors());
 app.use(express.json());
 // Define a route
 app.post('/', async(req, res) => {
@@ -24,8 +28,8 @@ app.post('/', async(req, res) => {
       url: 'https://google-translate113.p.rapidapi.com/api/v1/translator/text',
       headers: {
         'content-type': 'application/x-www-form-urlencoded',
-        'X-RapidAPI-Key': '6429489ee3msh613285eae7000fep119206jsn0eb3a9730243',
-        'X-RapidAPI-Host': 'google-translate113.p.rapidapi.com'
+        'X-RapidAPI-Key': process.env.API_KEY,
+        'X-RapidAPI-Host': process.env.API_HOST
       },
       data: encodedParams,
     };
